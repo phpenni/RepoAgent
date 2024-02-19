@@ -1,5 +1,6 @@
 <?php
 
+$comparisonUrl = 'https://mirror.alpix.eu/endeavouros/repo/state';
 $urls = [
     'https://ftp.belnet.be/mirror/endeavouros/repo/state Belgium',
     'https://ca.gate.endeavouros.com/endeavouros/repo/state Canada',
@@ -40,10 +41,14 @@ function getWebsiteContent($url) {
     }
 }
 
+// Den zu vergleichenden Wert einmal abrufen
+$comparisonValue = getWebsiteContent($comparisonUrl);
+
 echo '<table border="1">
         <tr>
             <th>URL</th>
             <th>State</th>
+            <th>Vergleich mit Referenz</th>
         </tr>';
 
 foreach ($urls as $url) {
@@ -51,9 +56,13 @@ foreach ($urls as $url) {
 
     $content = getWebsiteContent($serverUrl);
 
+    // Vergleiche den abgerufenen Inhalt mit dem Referenzwert
+    $comparisonResult = ($content == $comparisonValue) ? 'Übereinstimmung' : 'Keine Übereinstimmung';
+
     echo '<tr>
             <td>' . $serverUrl . '</td>
             <td>' . htmlspecialchars($content) . ' - ' . $country . '</td>
+            <td>' . $comparisonResult . '</td>
           </tr>';
 }
 
