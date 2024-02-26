@@ -1,12 +1,45 @@
 <?php
-$server = ' https://ftp.belnet.be/mirror/endeavouros/repo';
-$status = 'availeble';
-$fp = @fsockopen($server);
-if ($fp);
-$status = 'alive,but not responding';
-echo "right";
 
+class Server
+{
+    public $Server;
+    public $land;
 
-$checkserver1 = new CheckServer();
-$checkserver1->hinzufügen(new $ch);
+    public function __construct($Server, $land)
+    {
+        $this->setServer($Server);
+        $this->setland($land);
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getServer()
+    {
+        return $this->Server;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLand()
+    {
+        return $this->land;
+    }
+
+    /**
+     * @param mixed $Server
+     */
+    public function setServer($Server): void
+    {
+        $this->Server = $Server;
+    }
+
+    /**
+     * @param mixed $land
+     */
+    public function setLand($land): void
+    {
+        $this->land = $land;
+    }
+}
