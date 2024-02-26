@@ -1,10 +1,6 @@
 <?php
-
 class Mirrorlist
 {
-
-    // Array pflegen
-
     public array $mirrors = array();
 
     public function getMirrors(): array

@@ -1,4 +1,3 @@
-
 <?php
 $comparisonUrl = 'https://mirror.alpix.eu/endeavouros/repo/state';
 
@@ -26,9 +25,9 @@ $serverlist->add(new Mirror("https://fastmirror.pp.ua/endeavouros/repo/state", "
 $serverlist->add(new Mirror("https://endeavouros.ip-connect.info/repo/state", "https://endeavouros.ip-connect.info/iso/state","UKR"));
 $serverlist->add(new Mirror("https://mirrors.gigenet.com/endeavouros/repo/state", "https://mirrors.gigenet.com/endeavouros/iso/state","US"));
 
-function getWebsiteContent($serverlist): bool|string
+function getWebsiteContent($url): bool|string
 {
-    $ch = curl_init($serverlist);
+    $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
     $content = curl_exec($ch);
@@ -47,23 +46,31 @@ $comparisonValue = getWebsiteContent($comparisonUrl);
 
 echo '<table border="1">
         <tr>
-            <th>URL</th>
+            <th>Repo URL</th>
+            <th>ISO URL</th>
             <th>State</th>
-            <th>Vergleich mit Referenz</th>
+            <th>Repo Check</th>
+            <th>ISO Check</th>
         </tr>';
 
 foreach ($serverlist->getMirrors() as $mirror) {
-    $mirror->check();
-    $content = getWebsiteContent($mirror->getURL());
-    $comparisonResult = ($content == $comparisonValue) ? 'up to date' : 'not up to date ';
+    $mirror->checkRepo();
+    $mirror->checkISO();
+
+    $contentRepo = getWebsiteContent($mirror->getrepo());
+    $comparisonResultRepo = ($contentRepo == $comparisonValue) ? 'Up to date' : 'Not up to date';
+
+    $contentISO = getWebsiteContent($mirror->getISO());
+    $comparisonResultISO = ($contentISO == $comparisonValue) ? 'Up to date' : 'Not up to date';
 
     echo '<tr>
             <td>' . $mirror->getrepo() . '</td>
-            <td>' . htmlspecialchars($content) . ' - ' . $mirror->getLand() . '</td>
-            <td>' . $comparisonResult . '</td>
+            <td>' . $mirror->getISO() . '</td>
+            <td>' . htmlspecialchars($contentRepo) . ' - ' . $mirror->getLand() . '</td>
+            <td>' . $comparisonResultRepo . '</td>
+            <td>' . $comparisonResultISO . '</td>
           </tr>';
 }
-
 
 echo '</table>';
 ?>
