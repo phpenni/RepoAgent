@@ -1,77 +1,67 @@
 <?php
-
-class Mirror
+#[AllowDynamicProperties] class Mirror
 {
-    private $repo;
-    private $ISO;
-    private $land;
-    private $resultRepoCheck;
-    private $resultISOCheck;
+    private string $repo;
+    private string $ISO;
+    private string $land;
 
-    public function __construct($repo, $ISO, $land)
+
+    public function __construct(string $repo, string $ISO, string $land)
     {
         $this->setRepo($repo);
         $this->setISO($ISO);
         $this->setLand($land);
     }
 
-    public function getRepo()
+    public function getRepo(): string
     {
         return $this->repo;
     }
 
-    public function getISO()
+    public function getISO(): string
     {
         return $this->ISO;
     }
 
-    public function getLand()
+    public function getLand(): string
     {
         return $this->land;
     }
 
-    public function setRepo($repo)
+    public function setRepo(string $repo): void
     {
         $this->repo = $repo;
     }
 
-    public function setISO($ISO)
+    public function setISO(string $ISO): void
     {
         $this->ISO = $ISO;
     }
 
-    public function setLand($land)
+    public function setLand(string $land): void
     {
         $this->land = $land;
     }
 
-    public function checkRepo()
+    // check
+
+    private function checkRepo(): void
     {
         $repoContent = getWebsiteContent($this->getRepo());
-        $someValue = 'UpToDateMarker';
+        $someValue = 'https://mirror.alpix.eu/endeavouros/repo/state';
         $this->resultRepoCheck = ($repoContent == $someValue) ? 'Up to date' : 'Not up to date';
     }
 
-    public function checkISO()
+    private function checkISO(): void
     {
         $ISOContent = getWebsiteContent($this->getISO());
-        $someValue = 'UpToDateISO';
+        $someValue = 'https://mirror.alpix.eu/endeavouros/iso/state';
         $this->resultISOCheck = ($ISOContent == $someValue) ? 'Up to date' : 'Not up to date';
     }
 
-    public function getResultRepoCheck()
+    public function getResultRepoCheck(): ?string
     {
+        $this->checkRepo();
         return $this->resultRepoCheck;
     }
-
-    public function getResultISOCheck()
-    {
-        return $this->resultISOCheck;
-    }
 }
-?>
-
-
-// Wenn der Server ISO (dafür brauchst du auch ne Klassenvariable) hat, dann ISO checkne
-// Wenn der Server Repo hat, dann REPO checken
-//Ergebnisse in Klassenvariablen setzen

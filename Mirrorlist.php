@@ -1,25 +1,21 @@
 <?php
-class Mirrorlist
+$comparisonUrl = 'https://mirror.alpix.eu/endeavouros/repo/state';
+
+class MirrorList
 {
-    public array $mirrors = array();
+    public array $mirrors = [];
+    //tier1
 
     public function getMirrors(): array
     {
         return $this->mirrors;
     }
 
-    public function setMirrors(array $mirrors): void
+    public function add(Mirror $param): void
     {
-        $this->mirrors = $mirrors;
-    }
-
-    public function addMirror(Mirror $mirror): void
-    {
-        $this->mirrors[] = $mirror;
-    }
-
-    public function add(Mirror $param)
-    {
-        $this->mirrors [] = $param;
+        $this->mirrors[] = $param;
     }
 }
+
+
+
