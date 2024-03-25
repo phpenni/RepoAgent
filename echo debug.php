@@ -6,6 +6,10 @@ function getWebsiteContent($url): bool|string
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
     $content = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    // Debug-Ausgabe für HTTP-Code und URL
+    echo "Debug: URL $url returned HTTP code: $httpCode\n";
+
     curl_close($ch);
 
     if ($httpCode == 200) {
@@ -14,9 +18,11 @@ function getWebsiteContent($url): bool|string
         return "Seite nicht erreichbar (HTTP-Code: " . $httpCode . ")";
     }
 }
+
 $comparisonUrl = 'https://mirror.alpix.eu/endeavouros/repo/state';
-require_once "Mirrorlist.php";
+
 require_once "Mirror.php";
+require_once "Mirrorlist.php";
 
 $MirrorList = new MirrorList();
 $MirrorList->add(new Mirror("https://ftp.belnet.be/mirror/endeavouros/repo/state", "https://ftp.belnet.be/mirror/endeavouros/iso/state","Belgium"));
@@ -41,6 +47,7 @@ $MirrorList->add(new Mirror("https://fastmirror.pp.ua/endeavouros/repo/state", "
 $MirrorList->add(new Mirror("https://endeavouros.ip-connect.info/repo/state", "https://endeavouros.ip-connect.info/iso/state","Ukraine"));
 $MirrorList->add(new Mirror("https://mirrors.gigenet.com/endeavouros/repo/state", "https://mirrors.gigenet.com/endeavouros/iso/state","United States"));
 
+
 echo '<table border="1">
         <tr>
             <th>Repo URL</th>
@@ -51,17 +58,14 @@ echo '<table border="1">
         </tr>';
 
 foreach ($MirrorList->getMirrors() as $mirror) {
-    $contentRepo = getWebsiteContent($mirror->getRepo());
-    $comparisonResultRepo = ($contentRepo == $comparisonUrl) ? 'Up to date' : 'Not up to date';
+    // Debug-Ausgabe für den aktuellen Spiegel
+    echo "Debug: Checking mirror for {$mirror->getLand()}\n";
 
-    // Debug-Ausgabe für Repo
-    echo "Debug: Repo URL: " . $mirror->getRepo() . ", Content: $contentRepo, Comparison URL: $comparisonUrl\n";
+    $contentRepo = getWebsiteContent($mirror->getRepo());
+    $comparisonResultRepo = ($contentRepo == $mirror->getRepo()) ? 'Up to date' : 'Not up to date';
 
     $contentISO = getWebsiteContent($mirror->getISO());
-    $comparisonResultISO = ($contentISO == $comparisonUrl) ? 'Up to date' : 'Not up to date';
-
-    // Debug-Ausgabe für ISO
-    echo "Debug: ISO URL: " . $mirror->getISO() . ", Content: $contentISO, Comparison URL: $comparisonUrl\n";
+    $comparisonResultISO = ($contentISO == $mirror->getISO()) ? 'Up to date' : 'Not up to date';
 
     echo '<tr>
             <td>' . $mirror->getRepo() . '</td>
@@ -71,4 +75,6 @@ foreach ($MirrorList->getMirrors() as $mirror) {
             <td>' . $comparisonResultISO . '</td>
           </tr>';
 }
+
+echo '</table>';
 ?>
