@@ -48,8 +48,8 @@ echo '<table border="1">
         <tr>
             <th>Repo URL</th>
             <th>ISO URL</th>
-            <th>State</th>           
-           
+            <th>Repo State</th>           
+            <th>ISO State</th>           
             <th>Repo Check</th>
             <th>ISO Check</th>
         </tr>';
