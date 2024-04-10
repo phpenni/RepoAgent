@@ -47,14 +47,14 @@ $this->land = $land;
 private function checkRepo(): void
 {
 $repoContent = getWebsiteContent($this->getRepo());
-$comparisonValue = 'https://mirror.alpix.eu/endeavouros/repo/state';
+$comparisonValue = getWebsiteContent('https://mirror.alpix.eu/endeavouros/repo/state');
 $this->resultRepoCheck = ($repoContent == $comparisonValue) ? 'Up to date' : 'Not up to date';
 }
 
 private function checkISO(): void
 {
 $ISOContent = getWebsiteContent($this->getISO());
-$comparisonValue = 'https://mirror.alpix.eu/endeavouros/iso/state';
+$comparisonValue = getWebsiteContent('https://mirror.alpix.eu/endeavouros/iso/state');
 $this->resultISOCheck = ($ISOContent == $comparisonValue) ? 'Up to date' : 'Not up to date';
 }
 
@@ -71,3 +71,4 @@ return $this->resultISOCheck;
 }
 }
 ?>
+

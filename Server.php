@@ -14,7 +14,10 @@ function getWebsiteContent($url): bool|string
         return "Seite nicht erreichbar (HTTP-Code: " . $httpCode . ")";
     }
 }
-$comparisonUrl = 'https://mirror.alpix.eu/endeavouros/repo/state';
+
+$comparisonUrl1 = 'https://mirror.alpix.eu/endeavouros/repo/state';
+$comparisonUrl = 'https://mirror.alpix.eu/endeavouros/iso/state';
+
 require_once "Mirrorlist.php";
 require_once "Mirror.php";
 
@@ -32,7 +35,7 @@ $MirrorList->add(new Mirror("https://fosszone.csd.auth.gr/endeavouros/repo/state
 $MirrorList->add(new Mirror("https://mirrors.nxtgen.com/endeavouros-mirror/repo/state", "https://mirrors.nxtgen.com/endeavouros-mirror/iso/state","India"));
 $MirrorList->add(new Mirror("https://md.mirrors.hacktegic.com/endeavouros/repo/state", "https://md.mirrors.hacktegic.com/endeavouros/iso/state","Moldova "));
 $MirrorList->add(new Mirror("https://mirror.jingk.ai/endeavouros/repo/state", "https://mirror.jingk.ai/endeavouros/iso/state","Singapore"));
-$MirrorList->add(new Mirror("https://mirror.freedif.org/EndeavourOS/repo/state", "https://mirror.freedif.org/EndeavourOS/iso/state","Singapore"));
+$MirrorList->add(new Mirror("https://mirror.freedif.org/EndeavourOS/repo/state", "https://mirror.jingk.ai/endeavouros/iso/state","Singapore"));
 $MirrorList->add(new Mirror("https://mirrors.urbanwave.co.za/endeavouros/repo/state", "https://mirrors.urbanwave.co.za/endeavouros/iso/state","South Africa"));
 $MirrorList->add(new Mirror("https://mirror.funami.tech/endeavouros/repo/state", "https://mirror.funami.tech/endeavouros/iso/state","South Korea"));
 $MirrorList->add(new Mirror("https://ftp.acc.umu.se/mirror/endeavouros/repo/state", "https://ftp.acc.umu.se/mirror/endeavouros/iso/state","Sweden"));
@@ -45,30 +48,28 @@ echo '<table border="1">
         <tr>
             <th>Repo URL</th>
             <th>ISO URL</th>
-            <th>State</th>
+            <th>State</th>           
+           
             <th>Repo Check</th>
             <th>ISO Check</th>
         </tr>';
 
+
 foreach ($MirrorList->getMirrors() as $mirror) {
     $contentRepo = getWebsiteContent($mirror->getRepo());
-    $comparisonResultRepo = ($contentRepo == $comparisonUrl) ? 'Up to date' : 'Not up to date';
-
-    // Debug-Ausgabe für Repo
-    echo "Debug: Repo URL: " . $mirror->getRepo() . ", Content: $contentRepo, Comparison URL: $comparisonUrl\n";
-
     $contentISO = getWebsiteContent($mirror->getISO());
-    $comparisonResultISO = ($contentISO == $comparisonUrl) ? 'Up to date' : 'Not up to date';
 
-    // Debug-Ausgabe für ISO
-    echo "Debug: ISO URL: " . $mirror->getISO() . ", Content: $contentISO, Comparison URL: $comparisonUrl\n";
+    $getResultRepoCheck = ($contentRepo === getWebsiteContent($comparisonUrl1)) ? 'Up to date' : 'Not up to date';
+    $getResultISOCheck = ($contentISO === getWebsiteContent($comparisonUrl)) ? 'Up to date' : 'Not up to date';
 
     echo '<tr>
             <td>' . $mirror->getRepo() . '</td>
             <td>' . $mirror->getISO() . '</td>
             <td>' . htmlspecialchars($contentRepo) . ' - ' . $mirror->getLand() . '</td>
-            <td>' . $comparisonResultRepo . '</td>
-            <td>' . $comparisonResultISO . '</td>
+            <td>' . htmlspecialchars($contentISO) . ' - ' . $mirror->getLand() . '</td>
+            <td>' . $getResultRepoCheck . '</td>
+            <td>' . $getResultISOCheck . '</td>
           </tr>';
 }
 ?>
+

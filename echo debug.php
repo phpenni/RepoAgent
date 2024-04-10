@@ -71,6 +71,7 @@ foreach ($MirrorList->getMirrors() as $mirror) {
             <td>' . $mirror->getRepo() . '</td>
             <td>' . $mirror->getISO() . '</td>
             <td>' . htmlspecialchars($contentRepo) . ' - ' . $mirror->getLand() . '</td>
+            <td>' . htmlspecialchars($contentISO) . ' - ' . $mirror->getLand() . '</td>
             <td>' . $comparisonResultRepo . '</td>
             <td>' . $comparisonResultISO . '</td>
           </tr>';
