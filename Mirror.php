@@ -1,22 +1,30 @@
 <?php
 class Mirror
 {
+
 private string $repo;
 private string $ISO;
 private string $land;
+private string $name;
 private ?string $resultRepoCheck = null;
 private ?string $resultISOCheck = null;
 
-public function __construct(string $repo, string $ISO, string $land)
+public function __construct(string $repo, string $ISO, string $land, string $name)
 {
+
 $this->setRepo($repo);
 $this->setISO($ISO);
 $this->setLand($land);
+$this->setname($name);
 }
 
 public function getRepo(): string
 {
 return $this->repo;
+}
+public function getName():string
+{
+return $this->name;
 }
 
 public function getISO(): string
@@ -33,7 +41,10 @@ public function setRepo(string $repo): void
 {
 $this->repo = $repo;
 }
-
+public function setname(string $name): void
+{
+$this->name =$name;
+}
 public function setISO(string $ISO): void
 {
 $this->ISO = $ISO;
