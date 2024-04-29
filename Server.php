@@ -1,3 +1,16 @@
+
+
+<!DOCTYPE html>
+<head>
+<table>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Status</title>
+    <link rel="stylesheet" type="text/css" href="CSS.css">
+</table>
+</head>
+<body>
+
 <?php
 function getWebsiteContent($url): bool|string
 {
@@ -22,7 +35,6 @@ $comparisonUrl = 'https://mirror.alpix.eu/endeavouros/iso/state';
 
 require_once "Mirrorlist.php";
 require_once "Mirror.php";
-
 $MirrorList = new MirrorList();
 $MirrorList->add(new Mirror("https://ftp.belnet.be/mirror/endeavouros/repo/state", "https://ftp.belnet.be/mirror/endeavouros/iso/state","Belgium", "belnet"));
 $MirrorList->add(new Mirror("https://ca.gate.endeavouros.com/endeavouros/repo/state","https://ca.gate.endeavouros.com/endeavouros/iso/state","Canada", "CA.gate"));
@@ -47,30 +59,33 @@ $MirrorList->add(new Mirror("https://mirrors.gigenet.com/endeavouros/repo/state"
 
 echo '<table border="1">
         <tr>
-            <th>Repo URL</th>
-              <th>Repo State</th>           
+              <th>Name</th>
+              <th>Land</th>
+              <th>Repo URL</th>
+              <th>Repo State</th>              
               <th>Repo Check</th>
               <th>ISO URL</th>
-              <th>ISO State</th>           
+              <th>ISO State</th>         
               <th>ISO Check</th>
         </tr>';
 
 
 foreach ($MirrorList->getMirrors() as $mirror) {
-    $contentRepo = getWebsiteContent($mirror->getname());
-    $contentISO = getWebsiteContent($mirror->getname());
+    $contentRepo = getWebsiteContent($mirror->getrepo());
+    $contentISO = getWebsiteContent($mirror->getISO());
 
     $getResultRepoCheck = ($contentRepo === getWebsiteContent($comparisonUrl1)) ? 'Up to date' : 'Not up to date';
     $getResultISOCheck = ($contentISO === getWebsiteContent($comparisonUrl)) ? 'Up to date' : 'Not up to date';
 
     echo '<tr>
             <td>' . $mirror->getname() . '</td>
-            <td>' . htmlspecialchars($contentRepo) . ' - ' . $mirror->getLand() . '</td>
+            <td>' . $mirror->getLand() . '</td>   
+            <td>' . $mirror->getrepo() . '</td>          
+            <td>' . htmlspecialchars($contentRepo) . '</td>                      
             <td>' . $getResultRepoCheck . '</td>
-            <td>' . $mirror->getname() . '</td>
-            <td>' . htmlspecialchars($contentISO) . ' - ' . $mirror->getLand() . '</td>
+            <td>' . $mirror->getISO() . '</td> 
+            <td>' . htmlspecialchars($contentISO) . '</td>        
             <td>' . $getResultISOCheck . '</td>
           </tr>';
 }
 ?>
-

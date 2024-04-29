@@ -1,0 +1,27 @@
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+
+.up-to-date {
+    color: green;
+}
+
+.not-up-to-date {
+    color: red;
+}
+
+body {
+    background-color: #cceeff;
+}
