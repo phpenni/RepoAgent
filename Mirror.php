@@ -12,8 +12,8 @@ private ?string $resultISOCheck = null;
 public function __construct(string $repo, string $ISO, string $land, string $name)
 {
 
-$this->setRepo($repo);
-$this->setISO($ISO);
+$this->setRepoUrl($repo);
+$this->setISOUrl($ISO);
 $this->setLand($land);
 $this->setname($name);
 }
@@ -37,7 +37,7 @@ public function getLand(): string
 return $this->land;
 }
 
-public function setRepo(string $repo): void
+public function setRepoUrl(string $repo): void
 {
 $this->repo = $repo;
 }
@@ -45,7 +45,7 @@ public function setname(string $name): void
 {
 $this->name =$name;
 }
-public function setISO(string $ISO): void
+public function setISOUrl(string $ISO): void
 {
 $this->ISO = $ISO;
 }
@@ -59,6 +59,7 @@ private function checkRepo(): void
 {
 $repoContent = getWebsiteContent($this->getRepo());
 $comparisonValue = getWebsiteContent('https://mirror.alpix.eu/endeavouros/repo/state');
+// aus der datei die state nummer rausholen und vergleichen 
 $this->resultRepoCheck = ($repoContent == $comparisonValue) ? 'Up to date' : 'Not up to date';
 }
 

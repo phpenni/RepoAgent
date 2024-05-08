@@ -5,23 +5,25 @@ table {
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 3px solid black;
 }
 
 th, td {
+    border: 3px solid #dddddd;
     padding: 8px;
     text-align: left;
 }
-
-
-.up-to-date {
-    color: green;
-}
-
-.not-up-to-date {
-    color: red;
+tr:nth-child(1){
+    background-color: lightgray;
 }
 
 body {
     background-color: #cceeff;
+}
+.up-to-date {
+    color: #00FF00;
+}
+
+.not-up-to-date {
+    color: #FF0000;
 }

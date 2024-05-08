@@ -2,12 +2,11 @@
 
 <!DOCTYPE html>
 <head>
-<table>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mirror Status</title>
     <link rel="stylesheet" type="text/css" href="CSS.css">
-</table>
+
 </head>
 <body>
 
@@ -16,32 +15,34 @@ function getWebsiteContent($url): bool|string
 {
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 8);
     $content = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     $lines = explode("\n", $content);
-    return $lines[0];
     if ($httpCode == 200) {
-        return $content;
+        return $lines[0];
     } else {
-        return "Seite nicht erreichbar (HTTP-Code: " . $httpCode . ")";
+        if($httpCode == 0) {
+            $httpCode = "Timeout";
+        }
+        return "ERROR-HTTP-Code: " . $httpCode;
     }
 
 }
 
-$comparisonUrl1 = 'https://mirror.alpix.eu/endeavouros/repo/state';
-$comparisonUrl = 'https://mirror.alpix.eu/endeavouros/iso/state';
+$comparisonUrlrepo = 'https://mirror.alpix.eu/endeavouros/repo/state';
+$comparisonUrliso = 'https://mirror.alpix.eu/endeavouros/iso/state';
 
 require_once "Mirrorlist.php";
 require_once "Mirror.php";
 $MirrorList = new MirrorList();
+$MirrorList->add(new Mirror("https://mirror.alpix.eu/endeavouros/repo/state", "https://mirror.alpix.eu/endeavouros/iso/state","Germany", "alpix"));
 $MirrorList->add(new Mirror("https://ftp.belnet.be/mirror/endeavouros/repo/state", "https://ftp.belnet.be/mirror/endeavouros/iso/state","Belgium", "belnet"));
-$MirrorList->add(new Mirror("https://ca.gate.endeavouros.com/endeavouros/repo/state","https://ca.gate.endeavouros.com/endeavouros/iso/state","Canada", "CA.gate"));
 $MirrorList->add(new Mirror("https://mirrors.tuna.tsinghua.edu.cn/endeavouros/repo/state","https://mirrors.tuna.tsinghua.edu.cn/endeavouros/iso/state","China", "Tuna"));
 $MirrorList->add(new Mirror("https://mirrors.jlu.edu.cn/endeavouros/repo/state", "https://mirrors.jlu.edu.cn/endeavouros/iso/state","China", "jlu"));
 $MirrorList->add(new Mirror("https://mirror.sjtu.edu.cn/endeavouros/repo/state", "https://mirror.sjtu.edu.cn/endeavouros/iso/state","China", "sjtu"));
-$MirrorList->add(new Mirror("https://mirror.alpix.eu/endeavouros/repo/state", "https://mirror.alpix.eu/endeavouros/iso/state","Germany", "alpix"));
 $MirrorList->add(new Mirror("https://de.freedif.org/EndeavourOS/repo/state", "https://de.freedif.org/EndeavourOS/iso/state","Germany", "freedif"));
 $MirrorList->add(new Mirror("https://mirror.moson.org/endeavouros/repo/state", "https://mirror.moson.org/endeavouros/iso/state","Germany", "moson"));
 $MirrorList->add(new Mirror("https://fosszone.csd.auth.gr/endeavouros/repo/state", "https://fosszone.csd.auth.gr/endeavouros/iso/state","Greece", "fosszone"));
@@ -57,8 +58,8 @@ $MirrorList->add(new Mirror("https://fastmirror.pp.ua/endeavouros/repo/state", "
 $MirrorList->add(new Mirror("https://endeavouros.ip-connect.info/repo/state", "https://endeavouros.ip-connect.info/iso/state","Ukraine", "endeavouros"));
 $MirrorList->add(new Mirror("https://mirrors.gigenet.com/endeavouros/repo/state", "https://mirrors.gigenet.com/endeavouros/iso/state","United States", "gigenet"));
 
-echo '<table border="1">
-        <tr>
+echo '<table border=60%>
+        <tr>       
               <th>Name</th>
               <th>Land</th>
               <th>Repo URL</th>
@@ -70,12 +71,19 @@ echo '<table border="1">
         </tr>';
 
 
+$comparisonUrlrepoCache = getWebsiteContent($comparisonUrlrepo);
+$comparisonUrlisoCache = getWebsiteContent($comparisonUrliso);
+
 foreach ($MirrorList->getMirrors() as $mirror) {
     $contentRepo = getWebsiteContent($mirror->getrepo());
     $contentISO = getWebsiteContent($mirror->getISO());
 
-    $getResultRepoCheck = ($contentRepo === getWebsiteContent($comparisonUrl1)) ? 'Up to date' : 'Not up to date';
-    $getResultISOCheck = ($contentISO === getWebsiteContent($comparisonUrl)) ? 'Up to date' : 'Not up to date';
+
+$getResultRepoCheck = ($contentRepo === $comparisonUrlrepoCache) ? '<span class="up-to-date"> Up to date</span>' : '<span class="not-up-to-date"> Not up to date</span>';
+$getResultISOCheck = ($contentISO === $comparisonUrlisoCache) ? '<span class="up-to-date"> Up to date</span>' : '<span class="not-up-to-date"> Not up to date</span>';
+
+
+
 
     echo '<tr>
             <td>' . $mirror->getname() . '</td>
