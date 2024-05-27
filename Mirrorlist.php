@@ -13,3 +13,4 @@ class MirrorList
         $this->mirrors[] = $mirror;
     }
 }
+

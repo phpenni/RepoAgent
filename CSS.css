@@ -1,5 +1,6 @@
 
 table {
+    border-radius: 50% ;
     border-collapse: collapse;
     width: 100%;
 }
