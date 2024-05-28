@@ -1,28 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Status</title>
+    <style>
+        <?= file_get_contents("CSS.css"); ?>
+    </style>
+</head>
+<body>
 <?php
 function getWebsiteContent($url): bool|string
 {
+    echo "Fetching URL: $url<br>";
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 7);
     $content = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    // Debug-Ausgabe für HTTP-Code und URL
-    echo "Debug: URL $url returned HTTP code: $httpCode\n";
-
     curl_close($ch);
-
+    $lines = explode("\n", $content);
+    echo "HTTP Code for $url: $httpCode<br>";
     if ($httpCode == 200) {
-        return $content;
+        return $lines[0];
     } else {
-        return "Seite nicht erreichbar (HTTP-Code: " . $httpCode . ")";
+        if ($httpCode == 0) {
+            $httpCode = "Timeout";
+        }
+        return "ERROR-HTTP-Code: " . $httpCode;
     }
 }
 
-$comparisonUrl = 'https://mirror.alpix.eu/endeavouros/repo/state';
-
-require_once "Mirror.php";
 require_once "Mirrorlist.php";
+require_once "Mirror.php";
 
 $MirrorList = new MirrorList();
 $MirrorList->add(new Mirror("https://ftp.belnet.be/mirror/endeavouros/repo/state", "https://ftp.belnet.be/mirror/endeavouros/iso/state","Belgium", "belnet"));
@@ -37,7 +48,7 @@ $MirrorList->add(new Mirror("https://fosszone.csd.auth.gr/endeavouros/repo/state
 $MirrorList->add(new Mirror("https://mirrors.nxtgen.com/endeavouros-mirror/repo/state", "https://mirrors.nxtgen.com/endeavouros-mirror/iso/state","India", "nxtgen"));
 $MirrorList->add(new Mirror("https://md.mirrors.hacktegic.com/endeavouros/repo/state", "https://md.mirrors.hacktegic.com/endeavouros/iso/state","Moldova", "hacktegic"));
 $MirrorList->add(new Mirror("https://mirror.jingk.ai/endeavouros/repo/state", "https://mirror.jingk.ai/endeavouros/iso/state","Singapore", "jingk"));
-$MirrorList->add(new Mirror("https://mirror.freedif.org/EndeavourOS/repo/state", "https://mirror.jingk.ai/endeavouros/iso/state","Singapore", "mirror.freedif"));
+$MirrorList->add(new Mirror("https://mirror.freedif.org/EndeavourOS/repo/state", "https://mirror.freedif.org/EndeavourOS/iso/state","Singapore", "mirror.freedif"));
 $MirrorList->add(new Mirror("https://mirrors.urbanwave.co.za/endeavouros/repo/state", "https://mirrors.urbanwave.co.za/endeavouros/iso/state","South Africa", "urbanwave"));
 $MirrorList->add(new Mirror("https://mirror.funami.tech/endeavouros/repo/state", "https://mirror.funami.tech/endeavouros/iso/state","South Korea", "funami"));
 $MirrorList->add(new Mirror("https://ftp.acc.umu.se/mirror/endeavouros/repo/state", "https://ftp.acc.umu.se/mirror/endeavouros/iso/state","Sweden", "acc"));
@@ -46,35 +57,86 @@ $MirrorList->add(new Mirror("https://fastmirror.pp.ua/endeavouros/repo/state", "
 $MirrorList->add(new Mirror("https://endeavouros.ip-connect.info/repo/state", "https://endeavouros.ip-connect.info/iso/state","Ukraine", "endeavouros"));
 $MirrorList->add(new Mirror("https://mirrors.gigenet.com/endeavouros/repo/state", "https://mirrors.gigenet.com/endeavouros/iso/state","United States", "gigenet"));
 
+$filename = "mirror_table.html";
+$currentTime = time();
+$dateibearbeitungszeit = file_exists($filename) ? filemtime($filename) : 0;
+$dateibearbeitungszeit = $dateibearbeitungszeit + 30;
 
-echo '<table border="1">
-        <tr>
-            <th>Repo URL</th>
-            <th>ISO URL</th>
-            <th>State</th>
-            <th>Repo Check</th>
-            <th>ISO Check</th>
-        </tr>';
+echo "Current Time: $currentTime<br>";
+echo "File Modification Time: $dateibearbeitungszeit<br>";
 
-foreach ($MirrorList->getMirrors() as $mirror) {
-    // Debug-Ausgabe für den aktuellen Spiegel
-    echo "Debug: Checking mirror for {$mirror->getLand()}\n";
+if (file_exists($filename) && $currentTime < $dateibearbeitungszeit) {
+    echo "Loading table from cache.<br>";
+    $tableString = file_get_contents($filename);
+} else {
+    echo "Updating cache.<br>";
+    $comparisonUrlrepoCache = updateCacheIfNeeded("https://mirror.alpix.eu/endeavouros/repo/state", "comparison_urlrepo_cache.txt");
+    $comparisonUrlisoCache = updateCacheIfNeeded("https://mirror.alpix.eu/endeavouros/iso/state", "comparison_urliso_cache.txt");
 
-    $contentRepo = getWebsiteContent($mirror->getRepo());
-    $comparisonResultRepo = ($contentRepo == $mirror->getRepo()) ? 'Up to date' : 'Not up to date';
+    echo "Generating new table.<br>";
+    $tableString = generateTable($MirrorList, $comparisonUrlrepoCache, $comparisonUrlisoCache);
 
-    $contentISO = getWebsiteContent($mirror->getISO());
-    $comparisonResultISO = ($contentISO == $mirror->getISO()) ? 'Up to date' : 'Not up to date';
+    $tableString = "<style>" . file_get_contents("CSS.css") . "</style>" . $tableString;
 
-    echo '<tr>
-            <td>' . $mirror->getRepo() . '</td>
-            <td>' . $mirror->getISO() . '</td>
-            <td>' . htmlspecialchars($contentRepo) . ' - ' . $mirror->getLand() . '</td>
-            <td>' . htmlspecialchars($contentISO) . ' - ' . $mirror->getLand() . '</td>
-            <td>' . $comparisonResultRepo . '</td>
-            <td>' . $comparisonResultISO . '</td>
-          </tr>';
+    file_put_contents($filename, $tableString);
+    echo "New table written to cache.<br>";
 }
 
-echo '</table>';
+echo $tableString;
+
+function updateCacheIfNeeded($url, $cacheFile)
+{
+    echo "Updating cache for URL: $url<br>";
+    $lastFetchTime = file_exists($cacheFile) ? intval(file_get_contents($cacheFile)) : 0;
+    $currentTime = time();
+    $fetchInterval = 900; // 15 Minuten in Sekunden
+    if (($currentTime - $lastFetchTime > $fetchInterval) || !$lastFetchTime) {
+        $content = getWebsiteContent($url);
+        file_put_contents($cacheFile, $content);
+        file_put_contents('cache_timestamp.txt', $currentTime);
+        echo "Cache updated for $url<br>";
+        return $content;
+    } else {
+        echo "Using cached data for $url<br>";
+        return file_get_contents($cacheFile);
+    }
+}
+
+function generateTable($MirrorList, $comparisonUrlrepoCache, $comparisonUrlisoCache)
+{
+    echo "Generating table.<br>";
+    $table = '<table id="mirrorTable" border="1">';
+    $table .= '<tr>';
+    $table .= '<th>Name</th>';
+    $table .= '<th>Land</th>';
+    $table .= '<th>Repo URL</th>';
+    $table .= '<th>Repo State</th>';
+    $table .= '<th>Repo Check</th>';
+    $table .= '<th>ISO URL</th>';
+    $table .= '<th>ISO State</th>';
+    $table .= '<th>ISO Check</th>';
+    $table .= '</tr>';
+
+    foreach ($MirrorList->getMirrors() as $mirror) {
+        echo "Processing mirror: " . $mirror->getName() . "<br>";
+        $contentRepo = getWebsiteContent($mirror->getRepo());
+        $contentISO = getWebsiteContent($mirror->getISO());
+
+        $table .= '<tr>';
+        $table .= '<td>' . $mirror->getName() . '</td>';
+        $table .= '<td>' . $mirror->getLand() . '</td>';
+        $table .= '<td>' . $mirror->getRepo() . '</td>';
+        $table .= '<td>' . htmlspecialchars($contentRepo) . '</td>';
+        $table .= '<td>' . $mirror->getResultRepo() . '</td>';
+        $table .= '<td>' . $mirror->getISO() . '</td>';
+        $table .= '<td>' . htmlspecialchars($contentISO) . '</td>';
+        $table .= '<td>' . $mirror->getResultISO() . '</td>';
+        $table .= '</tr>';
+    }
+    $table .= '</table>';
+    echo "Table generation complete.<br>";
+    return $table;
+}
 ?>
+</body>
+</html>
