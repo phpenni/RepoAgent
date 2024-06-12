@@ -28,3 +28,92 @@ body {
 .not-up-to-date {
     color: #FF0000;
 }
+.country-Belgium {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Canada {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-China {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Germany {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Greece {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-India {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Moldova {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Singapore {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-South-Africa {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-South-Korea {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Sweden {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Taiwan {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Ukraine {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-United-States {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+/* Standard Tabelle Styling */
+#mirrorTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#mirrorTable th, #mirrorTable td {
+    padding: 8px;
+    text-align: left;
+}
+
+#mirrorTable th {
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+
+#mirrorTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
