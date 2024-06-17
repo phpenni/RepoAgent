@@ -1,4 +1,6 @@
 <?php
+
+// here are the getter and setter  made
 class Mirror {
     private string $repo;
     private string $ISO;

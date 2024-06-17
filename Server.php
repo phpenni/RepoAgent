@@ -67,6 +67,7 @@ function generateTable($mirrorList, $comparisonUrlRepoCache, $comparisonUrlIsoCa
         $isoCheck = ($contentIso === $comparisonUrlIsoCache) ? '<span class="up-to-date"> Up to date</span>' : '<span class="not-up-to-date"> Not up to date</span>';
 
         $countryClass = 'country-' . str_replace(' ', '-', $mirror->getLand());
+
         // Here the data is inserted into the table
         $table .= '<tr>';
         $table .= '<td>' . $mirror->getName() . '</td>';
