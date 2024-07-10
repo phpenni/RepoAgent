@@ -1,0 +1,202 @@
+[
+    {
+        "Name": "belnet",
+        "Land": "Belgium",
+        "Repo URL": "https:\/\/ftp.belnet.be\/mirror\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/ftp.belnet.be\/mirror\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "CA.gate",
+        "Land": "Canada",
+        "Repo URL": "https:\/\/ca.gate.endeavouros.com\/endeavouros\/repo\/state",
+        "Repo State": "ERROR-HTTP-Code: Timeout",
+        "Repo Check": "Not up to date",
+        "ISO URL": "https:\/\/ca.gate.endeavouros.com\/endeavouros\/iso\/state",
+        "ISO State": "ERROR-HTTP-Code: Timeout",
+        "ISO Check": "Not up to date"
+    },
+    {
+        "Name": "Tuna",
+        "Land": "China",
+        "Repo URL": "https:\/\/mirrors.tuna.tsinghua.edu.cn\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirrors.tuna.tsinghua.edu.cn\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "jlu",
+        "Land": "China",
+        "Repo URL": "https:\/\/mirrors.jlu.edu.cn\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirrors.jlu.edu.cn\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "sjtu",
+        "Land": "China",
+        "Repo URL": "https:\/\/mirror.sjtu.edu.cn\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.sjtu.edu.cn\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "alpix",
+        "Land": "Germany",
+        "Repo URL": "https:\/\/mirror.alpix.eu\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.alpix.eu\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "freedif",
+        "Land": "Germany",
+        "Repo URL": "https:\/\/de.freedif.org\/EndeavourOS\/repo\/state",
+        "Repo State": "ERROR-HTTP-Code: Timeout",
+        "Repo Check": "Not up to date",
+        "ISO URL": "https:\/\/de.freedif.org\/EndeavourOS\/iso\/state",
+        "ISO State": "ERROR-HTTP-Code: Timeout",
+        "ISO Check": "Not up to date"
+    },
+    {
+        "Name": "moson",
+        "Land": "Germany",
+        "Repo URL": "https:\/\/mirror.moson.org\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.moson.org\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "fosszone",
+        "Land": "Greece",
+        "Repo URL": "https:\/\/fosszone.csd.auth.gr\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/fosszone.csd.auth.gr\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "nxtgen",
+        "Land": "India",
+        "Repo URL": "https:\/\/mirrors.nxtgen.com\/endeavouros-mirror\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirrors.nxtgen.com\/endeavouros-mirror\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "hacktegic",
+        "Land": "Moldova",
+        "Repo URL": "https:\/\/md.mirrors.hacktegic.com\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/md.mirrors.hacktegic.com\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "jingk",
+        "Land": "Singapore",
+        "Repo URL": "https:\/\/mirror.jingk.ai\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.jingk.ai\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "mirror.freedif",
+        "Land": "Singapore",
+        "Repo URL": "https:\/\/mirror.freedif.org\/EndeavourOS\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.freedif.org\/EndeavourOS\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "urbanwave",
+        "Land": "South Africa",
+        "Repo URL": "https:\/\/mirrors.urbanwave.co.za\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirrors.urbanwave.co.za\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "funami",
+        "Land": "South Korea",
+        "Repo URL": "https:\/\/mirror.funami.tech\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.funami.tech\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "acc",
+        "Land": "Sweden",
+        "Repo URL": "https:\/\/ftp.acc.umu.se\/mirror\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/ftp.acc.umu.se\/mirror\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "archlinux",
+        "Land": "Taiwan",
+        "Repo URL": "https:\/\/mirror.archlinux.tw\/EndeavourOS\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirror.archlinux.tw\/EndeavourOS\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "fastmirror",
+        "Land": "Ukraine",
+        "Repo URL": "https:\/\/fastmirror.pp.ua\/endeavouros\/repo\/state",
+        "Repo State": "ERROR-HTTP-Code: Timeout",
+        "Repo Check": "Not up to date",
+        "ISO URL": "https:\/\/fastmirror.pp.ua\/endeavouros\/iso\/state",
+        "ISO State": "ERROR-HTTP-Code: Timeout",
+        "ISO Check": "Not up to date"
+    },
+    {
+        "Name": "endeavouros",
+        "Land": "Ukraine",
+        "Repo URL": "https:\/\/endeavouros.ip-connect.info\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/endeavouros.ip-connect.info\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    },
+    {
+        "Name": "gigenet",
+        "Land": "United States",
+        "Repo URL": "https:\/\/mirrors.gigenet.com\/endeavouros\/repo\/state",
+        "Repo State": "2201",
+        "Repo Check": "Up to date",
+        "ISO URL": "https:\/\/mirrors.gigenet.com\/endeavouros\/iso\/state",
+        "ISO State": "3",
+        "ISO Check": "Up to date"
+    }
+]

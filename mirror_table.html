@@ -1,0 +1,120 @@
+<style>
+table {
+    border-radius: 50% ;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 3px solid black;
+}
+
+th, td {
+    border: 3px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+tr:nth-child(1){
+    background-color: lightgray;
+}
+
+body {
+    background-color: #cceeff;
+}
+.up-to-date {
+    color: #00FF00;
+}
+
+.not-up-to-date {
+    color: #FF0000;
+}
+.country-Belgium {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Canada {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-China {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Germany {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Greece {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-India {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Moldova {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Singapore {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-South-Africa {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-South-Korea {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Sweden {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Taiwan {
+    background-color: #2e4053; /* Dunkles Blaugrau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-Ukraine {
+    background-color: #2c3e50; /* Dunkles Blau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+.country-United-States {
+    background-color: #34495e; /* Dunkler Graublau */
+    color: #ecf0f1; /* Helles Grau */
+}
+
+/* Standard Tabelle Styling */
+#mirrorTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#mirrorTable th, #mirrorTable td {
+    padding: 8px;
+    text-align: left;
+}
+
+#mirrorTable th {
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+
+#mirrorTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+</style><table id="mirrorTable" border="1"><tr><th>Name</th><th>Land</th><th>Repo URL</th><th>Repo State</th><th>Repo Check</th><th>ISO URL</th><th>ISO State</th><th>ISO Check</th></tr><tr><td>belnet</td><td>Belgium</td><td>https://ftp.belnet.be/mirror/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://ftp.belnet.be/mirror/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>CA.gate</td><td>Canada</td><td>https://ca.gate.endeavouros.com/endeavouros/repo/state</td><td>ERROR-HTTP-Code: Timeout</td><td><span class="not-up-to-date"> Not up to date</span></td><td>https://ca.gate.endeavouros.com/endeavouros/iso/state</td><td>ERROR-HTTP-Code: Timeout</td><td><span class="not-up-to-date"> Not up to date</span></td><tr><td>Tuna</td><td>China</td><td>https://mirrors.tuna.tsinghua.edu.cn/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirrors.tuna.tsinghua.edu.cn/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>jlu</td><td>China</td><td>https://mirrors.jlu.edu.cn/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirrors.jlu.edu.cn/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>sjtu</td><td>China</td><td>https://mirror.sjtu.edu.cn/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.sjtu.edu.cn/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>alpix</td><td>Germany</td><td>https://mirror.alpix.eu/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.alpix.eu/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>freedif</td><td>Germany</td><td>https://de.freedif.org/EndeavourOS/repo/state</td><td>ERROR-HTTP-Code: Timeout</td><td><span class="not-up-to-date"> Not up to date</span></td><td>https://de.freedif.org/EndeavourOS/iso/state</td><td>ERROR-HTTP-Code: Timeout</td><td><span class="not-up-to-date"> Not up to date</span></td><tr><td>moson</td><td>Germany</td><td>https://mirror.moson.org/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.moson.org/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>fosszone</td><td>Greece</td><td>https://fosszone.csd.auth.gr/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://fosszone.csd.auth.gr/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>nxtgen</td><td>India</td><td>https://mirrors.nxtgen.com/endeavouros-mirror/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirrors.nxtgen.com/endeavouros-mirror/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>hacktegic</td><td>Moldova</td><td>https://md.mirrors.hacktegic.com/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://md.mirrors.hacktegic.com/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>jingk</td><td>Singapore</td><td>https://mirror.jingk.ai/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.jingk.ai/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>mirror.freedif</td><td>Singapore</td><td>https://mirror.freedif.org/EndeavourOS/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.freedif.org/EndeavourOS/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>urbanwave</td><td>South Africa</td><td>https://mirrors.urbanwave.co.za/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirrors.urbanwave.co.za/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>funami</td><td>South Korea</td><td>https://mirror.funami.tech/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.funami.tech/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>acc</td><td>Sweden</td><td>https://ftp.acc.umu.se/mirror/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://ftp.acc.umu.se/mirror/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>archlinux</td><td>Taiwan</td><td>https://mirror.archlinux.tw/EndeavourOS/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirror.archlinux.tw/EndeavourOS/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>fastmirror</td><td>Ukraine</td><td>https://fastmirror.pp.ua/endeavouros/repo/state</td><td>ERROR-HTTP-Code: Timeout</td><td><span class="not-up-to-date"> Not up to date</span></td><td>https://fastmirror.pp.ua/endeavouros/iso/state</td><td>ERROR-HTTP-Code: Timeout</td><td><span class="not-up-to-date"> Not up to date</span></td><tr><td>endeavouros</td><td>Ukraine</td><td>https://endeavouros.ip-connect.info/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://endeavouros.ip-connect.info/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td><tr><td>gigenet</td><td>United States</td><td>https://mirrors.gigenet.com/endeavouros/repo/state</td><td>2201</td><td><span class="up-to-date"> Up to date</span></td><td>https://mirrors.gigenet.com/endeavouros/iso/state</td><td>3</td><td><span class="up-to-date"> Up to date</span></td></table>
